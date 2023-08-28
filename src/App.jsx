@@ -1,13 +1,29 @@
 import { useState } from 'react';
 import { products as initialProducts } from './mocks/products.json';
 
-import ProductsList from './ProductsList';
+import Filters from './components/Filters';
+import ProductsList from './components/ProductsList';
+import ProductsManager from './components/ProductsManager';
 
 function App() {
   const [filters, setFilters] = useState({
     category: 'all',
     minPrice: 0,
   });
+
+  function setCategory(newCategory) {
+    setFilters({
+      ...filters,
+      category: newCategory,
+    });
+  }
+
+  function setMinPrice(newMinPrice) {
+    setFilters({
+      ...filters,
+      minPrice: newMinPrice,
+    });
+  }
 
   function filterProducts(products) {
     return products.filter(product => {
@@ -20,7 +36,17 @@ function App() {
 
   const filteredProducts = filterProducts(initialProducts);
 
-  return <ProductsList products={filteredProducts} />;
+  return (
+    <ProductsManager>
+      <Filters
+        category={filters.category}
+        setCategory={setCategory}
+        minPrice={filters.minPrice}
+        setMinPrice={setMinPrice}
+      />
+      <ProductsList products={filteredProducts} />
+    </ProductsManager>
+  );
 }
 
 export default App;
