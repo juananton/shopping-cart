@@ -5,7 +5,7 @@ function ProductsList({ products }) {
         <li key={product.id}>
           <img src={product.thumbnail} alt={product.title} />
           <div>
-            <strong>{product.title}</strong> - <span>{product.price}</span>
+            <strong>{product.title}</strong> - <span>{product.price}€</span>
           </div>
           <button>Add to cart</button>
         </li>

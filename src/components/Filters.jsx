@@ -1,7 +1,10 @@
-import { useId } from 'react';
+import { useContext, useId } from 'react';
 import { CATEGORIES } from '../constants/categories';
+import { FiltersContext } from '../contexts/FiltersContext';
 
-function Filters({ setCategory, category, minPrice, setMinPrice }) {
+function Filters() {
+  const { minPrice, setCategory, setMinPrice } = useContext(FiltersContext);
+
   const categoryFilterId = useId();
   const minPriceFilterId = useId();
 
@@ -11,7 +14,6 @@ function Filters({ setCategory, category, minPrice, setMinPrice }) {
         <label htmlFor={categoryFilterId}>Categoría</label>
         <select
           id={categoryFilterId}
-          value={category}
           onChange={e => setCategory(e.target.value)}
         >
           <option value='all'>Todas</option>
