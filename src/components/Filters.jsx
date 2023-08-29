@@ -1,9 +1,10 @@
 import { useContext, useId } from 'react';
-import { CATEGORIES } from '../constants/categories';
+import { useProducts } from '../Hooks/useProducts';
 import { FiltersContext } from '../contexts/FiltersContext';
 
 function Filters() {
   const { minPrice, setCategory, setMinPrice } = useContext(FiltersContext);
+  const { CATEGORIES } = useProducts();
 
   const categoryFilterId = useId();
   const minPriceFilterId = useId();

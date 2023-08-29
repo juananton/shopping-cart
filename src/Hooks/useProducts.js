@@ -14,7 +14,12 @@ export function useProducts() {
     fetchProducts();
   }, []);
 
+  const CATEGORIES = products.reduce((acc, curr) => {
+    !acc.includes(curr.category) && acc.push(curr.category);
+    return acc;
+  }, []);
+
   const filteredProducts = filterProducts(products);
 
-  return { filteredProducts };
+  return { CATEGORIES, filteredProducts };
 }
