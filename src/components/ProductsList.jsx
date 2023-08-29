@@ -1,7 +1,11 @@
-function ProductsList({ products }) {
+import { useProducts } from '../Hooks/useProducts';
+
+function ProductsList() {
+  const { filteredProducts } = useProducts();
+
   return (
     <ul className='products'>
-      {products.slice(0, 10).map(product => (
+      {filteredProducts.slice(0, 10).map(product => (
         <li key={product.id}>
           <img src={product.thumbnail} alt={product.title} />
           <div>
