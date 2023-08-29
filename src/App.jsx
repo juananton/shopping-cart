@@ -1,21 +1,19 @@
-import { products as initialProducts } from './mocks/products.json';
-
-import { useFilters } from './Hooks/useFilters';
+import { useProducts } from './Hooks/useProducts';
 import Filters from './components/Filters';
 import Footer from './components/Footer';
+import Header from './components/Header';
 import ProductsList from './components/ProductsList';
-import ProductsManager from './components/ProductsManager';
 
 function App() {
-  const { filterProducts } = useFilters();
-  const filteredProducts = filterProducts(initialProducts);
+  const { filteredProducts } = useProducts();
 
   return (
-    <ProductsManager>
+    <>
+      <Header />
       <Filters />
       <ProductsList products={filteredProducts} />
       <Footer />
-    </ProductsManager>
+    </>
   );
 }
 
