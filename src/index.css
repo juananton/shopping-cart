@@ -32,4 +32,58 @@ body {
   gap: 1rem;
   border: 1px solid black;
   padding: 1rem;
+  background-color: white;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart {
+  position: fixed;
+  display: none;
+  width: 20rem;
+  position: absolute;
+  background-color: black;
+  padding: 0 1.5rem;
+  right: 0;
+  top: 0;
+}
+
+.cart h1 {
+  color: white;
+  text-align: left;
+}
+
+.cart-button {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  color: white;
+  background: #09f;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.cart-button:hover {
+  scale: 1.1;
+}
+
+.cart-button ~ input:checked ~ .cart {
+  height: 100%;
+  display: block;
+}
+
+button,
+select,
+input[type='range'] {
+  cursor: pointer;
 }

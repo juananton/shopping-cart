@@ -1,20 +1,17 @@
 import { useProducts } from '../Hooks/useProducts';
+import ProductsListItem from './ProductsListItem';
 
 function ProductsList() {
   const { filteredProducts } = useProducts();
 
   return (
-    <ul className='products'>
-      {filteredProducts.slice(0, 10).map(product => (
-        <li key={product.id}>
-          <img src={product.thumbnail} alt={product.title} />
-          <div>
-            <strong>{product.title}</strong> - <span>{product.price}€</span>
-          </div>
-          <button>Add to cart</button>
-        </li>
-      ))}
-    </ul>
+    <main>
+      <ul className='products'>
+        {filteredProducts.slice(0, 10).map(product => (
+          <ProductsListItem key={product.id} product={product} />
+        ))}
+      </ul>
+    </main>
   );
 }
 

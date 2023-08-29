@@ -1,8 +1,7 @@
-import { useContext } from 'react';
-import { FiltersContext } from '../contexts/FiltersContext';
+import { useFilters } from '../Hooks/useFilters';
 
 function Footer() {
-  const { category, minPrice } = useContext(FiltersContext);
+  const { category, minPrice } = useFilters();
   return (
     <div>
       Mostrando {category} de más de {minPrice} €
