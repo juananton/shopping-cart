@@ -59,8 +59,8 @@ export function cartReducer(state, action) {
       return newState;
     }
     case CART_ACTION_TYPES.CLEAR_CART: {
-      updateLocalStorage(cartInitialState);
-      return cartInitialState;
+      updateLocalStorage([]);
+      return [];
     }
   }
   return state;
