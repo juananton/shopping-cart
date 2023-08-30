@@ -1,4 +1,5 @@
-export const cartInitialState = [];
+export const cartInitialState =
+  JSON.parse(window.localStorage.getItem('cart')) || [];
 
 export const CART_ACTION_TYPES = {
   ADD_TO_CART: 'ADD_TO_CART',
@@ -6,6 +7,11 @@ export const CART_ACTION_TYPES = {
   REMOVE_ALL: 'REMOVE_ALL',
   CLEAR_CART: 'CLEAR_CART',
 };
+
+// Update localStorage with state for cart
+export function updateLocalStorage(state) {
+  window.localStorage.setItem('cart', JSON.stringify(state));
+}
 
 export function cartReducer(state, action) {
   const { type: actionType, payload: actionPayload } = action;
@@ -17,34 +23,43 @@ export function cartReducer(state, action) {
       if (cartProductIndex >= 0) {
         const newState = structuredClone(state);
         newState[cartProductIndex].quantity += 1;
+        updateLocalStorage(newState);
         return newState;
       }
 
-      return [
+      const newState = [
         ...state,
         {
           ...actionPayload,
           quantity: 1,
         },
       ];
+      updateLocalStorage(newState);
+      return newState;
     }
     case CART_ACTION_TYPES.REMOVE_ONE: {
       const { id, quantity } = actionPayload;
       const cartProductIndex = state.findIndex(item => item.id === id);
 
       if (quantity > 1) {
-        const newstate = structuredClone(state);
-        newstate[cartProductIndex].quantity -= 1;
-        return newstate;
+        const newState = structuredClone(state);
+        newState[cartProductIndex].quantity -= 1;
+        updateLocalStorage(newState);
+        return newState;
       } else {
-        return state.filter(item => item.id !== id);
+        const newState = state.filter(item => item.id !== id);
+        updateLocalStorage(newState);
+        return newState;
       }
     }
     case CART_ACTION_TYPES.REMOVE_ALL: {
       const { id } = actionPayload;
-      return state.filter(item => item.id !== id);
+      const newState = state.filter(item => item.id !== id);
+      updateLocalStorage(newState);
+      return newState;
     }
     case CART_ACTION_TYPES.CLEAR_CART: {
+      updateLocalStorage(cartInitialState);
       return cartInitialState;
     }
   }
