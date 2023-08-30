@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { useFilters } from '../Hooks/useFilters';
 import { useProducts } from '../Hooks/useProducts';
+import { capitalizeWord } from '../functions/capitalizeWords';
 
 function Filters() {
   const { minPrice, setCategory, setMinPrice } = useFilters();
@@ -12,21 +13,21 @@ function Filters() {
   return (
     <section className='filters'>
       <div>
-        <label htmlFor={categoryFilterId}>Categoría</label>
+        <label htmlFor={categoryFilterId}>Showing</label>
         <select
           id={categoryFilterId}
           onChange={e => setCategory(e.target.value)}
         >
-          <option value='all'>Todas</option>
+          <option value={'all'}>All</option>
           {CATEGORIES.map(cat => (
             <option key={cat} value={cat}>
-              {cat}
+              {capitalizeWord(cat)}
             </option>
           ))}
         </select>
       </div>
       <div>
-        <label htmlFor={minPriceFilterId}>A partir de</label>
+        <label htmlFor={minPriceFilterId}>Over</label>
         <input
           type='range'
           id={minPriceFilterId}
@@ -35,7 +36,7 @@ function Filters() {
           value={minPrice}
           onChange={e => Number(setMinPrice(e.target.value))}
         />
-        <span>{minPrice}€</span>
+        <span>${minPrice}</span>
       </div>
     </section>
   );
