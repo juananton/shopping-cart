@@ -1,9 +1,13 @@
 import { useCart } from '../Hooks/useCart';
 
 function ProductsListItem({ product }) {
-  const { checkProductIcart, addToCart, removeFromCart } = useCart();
+  const { cart, addToCart, removeAll } = useCart();
 
-  const isProductIncart = checkProductIcart(product);
+  function checkProductIncart(product) {
+    return cart.find(item => item.id === product.id);
+  }
+
+  const isProductIncart = checkProductIncart(product);
 
   return (
     <li>
@@ -18,7 +22,7 @@ function ProductsListItem({ product }) {
           backgroundColor: isProductIncart ? 'red' : '#09f',
         }}
         onClick={() =>
-          isProductIncart ? removeFromCart(product) : addToCart(product)
+          isProductIncart ? removeAll(product) : addToCart(product)
         }
       >
         {isProductIncart ? 'Remove from cart' : 'Add to cart'}

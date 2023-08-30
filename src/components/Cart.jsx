@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { useCart } from '../Hooks/useCart';
+import { useCart } from '../hooks/useCart';
 import CartItem from './CartItem';
 
 function Cart() {

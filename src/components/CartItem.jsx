@@ -1,7 +1,7 @@
-import { useCart } from '../Hooks/useCart';
+import { useCart } from '../hooks/useCart';
 
 function CartItem({ product }) {
-  const { addToCart, removeOneFromCart, removeFromCart } = useCart();
+  const { addToCart, removeOne, removeAll } = useCart();
   return (
     <li key={product.id}>
       <img src={product.thumbnail} alt={product.title} />
@@ -11,12 +11,10 @@ function CartItem({ product }) {
       <footer>
         <p>{product.quantity}</p>
         <div className='add-buttons'>
-          <button onClick={() => removeOneFromCart(product)}>-</button>
+          <button onClick={() => removeOne(product)}>-</button>
           <button onClick={() => addToCart(product)}>+</button>
         </div>
-        <button onClick={() => removeFromCart(product)}>
-          Remove from cart
-        </button>
+        <button onClick={() => removeAll(product)}>Remove from cart</button>
       </footer>
     </li>
   );
